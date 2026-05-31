@@ -18,6 +18,26 @@ Full-stack simulation platform for manufacturing and supply chain operations. Th
 - Dashboard KPIs for throughput, picking efficiency, order cycle time, warehouse utilization, fuel cost, labor efficiency, and savings
 - Congestion heatmaps, route animation, delivery route visualization, CSV upload, report endpoint, authentication, and role checks
 
+## Industry Pitch: HVAC & Heat-Exchanger Manufacturing
+
+This project is positioned for companies similar to Indus International FZC: manufacturers and solution providers serving HVAC, refrigeration, heat pump, and OEM component supply chains.
+
+Typical operating challenges this system addresses:
+
+- Fast-moving coil, tube, fin, packaging, and spare-part inventory must be close to dispatch without blocking production support aisles.
+- Fragile, oversized, hazardous, or temperature-sensitive materials need compliant slotting instead of generic shelf assignment.
+- Warehouse, stores, and logistics teams need one view of blocked aisles, picker work, order priority, and dispatch readiness.
+- Export and OEM delivery commitments require capacity-aware vehicle planning, traffic-aware scheduling, and on-time delivery visibility.
+- High service expectations make picking delays, missing stock, and avoidable route distance costly.
+
+How the project helps:
+
+- Recommends better shelf placement through ABC analysis and special-handling rules.
+- Calculates optimized pick paths using Dijkstra and A* with congestion and blocked-aisle handling.
+- Simulates multiple pickers to expose route conflicts before the work starts.
+- Plans dispatch routes around traffic, delivery windows, and vehicle capacity.
+- Tracks operational KPIs that matter to warehouse and supply-chain leadership: utilization, throughput, pick efficiency, order fulfillment, travel reduction, fuel cost, and savings.
+
 ## Quick Start
 
 1. Start PostgreSQL:
@@ -78,4 +98,3 @@ Boolean fields accept `true`, `false`, `1`, `0`, `yes`, or `no`.
 ## Development Notes
 
 The API is designed to be useful even when PostgreSQL is not running: simulation and optimization endpoints use deterministic demo data. PostgreSQL models and Docker wiring are included for production persistence, audit trails, users, uploads, and report metadata.
-

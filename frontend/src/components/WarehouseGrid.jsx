@@ -10,7 +10,15 @@ const typeIcon = {
   blocked: <X size={13} />,
 };
 
-export default function WarehouseGrid({ layout, routes = [], heatmap = [], obstacles, setObstacles, activeTick }) {
+export default function WarehouseGrid({
+  layout,
+  routes = [],
+  heatmap = [],
+  obstacles,
+  setObstacles,
+  activeTick,
+  onCellSelect,
+}) {
   if (!layout) return null;
 
   const obstacleKeys = new Set(obstacles.map((point) => `${point.x}:${point.y}`));
@@ -26,7 +34,13 @@ export default function WarehouseGrid({ layout, routes = [], heatmap = [], obsta
   );
 
   function toggleObstacle(cell) {
-    if (!cell.walkable || cell.type === 'dispatch') return;
+    const canToggle = cell.walkable && cell.type !== 'dispatch';
+    onCellSelect?.({
+      ...cell,
+      canToggle,
+      action: canToggle ? 'Aisle toggled as blocked/open' : 'Fixed warehouse zone inspected',
+    });
+    if (!canToggle) return;
     const key = `${cell.x}:${cell.y}`;
     if (obstacleKeys.has(key)) {
       setObstacles(obstacles.filter((point) => `${point.x}:${point.y}` !== key));
@@ -41,14 +55,16 @@ export default function WarehouseGrid({ layout, routes = [], heatmap = [], obsta
         const key = `${cell.x}:${cell.y}`;
         const heat = heatByKey.get(key) || cell.congestion || 0;
         const active = activeByKey.get(key);
+        const canToggle = cell.walkable && cell.type !== 'dispatch';
         const classes = ['warehouse-cell', cell.type];
+        if (!canToggle) classes.push('fixed');
         if (routeKeys.has(key)) classes.push('route');
         if (active) classes.push('active');
         return (
           <button
             type="button"
             key={key}
-            title={`${cell.label || cell.type} (${cell.x}, ${cell.y})`}
+            title={`${cell.label || cell.type} (${cell.x}, ${cell.y}) - ${canToggle ? 'click to block or clear aisle' : 'click to inspect fixed zone'}`}
             className={classes.join(' ')}
             style={{ '--heat': Math.min(1, heat) }}
             onClick={() => toggleObstacle(cell)}
