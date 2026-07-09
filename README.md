@@ -95,6 +95,3 @@ sku,name,category,velocity,unit_cost,quantity,length,width,height,weight,hazardo
 
 Boolean fields accept `true`, `false`, `1`, `0`, `yes`, or `no`.
 
-## Development Notes
-
-The API is designed to be useful even when PostgreSQL is not running: simulation and optimization endpoints use deterministic demo data. PostgreSQL models and Docker wiring are included for production persistence, audit trails, users, uploads, and report metadata.
