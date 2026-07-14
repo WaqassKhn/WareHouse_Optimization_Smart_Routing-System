@@ -1,7 +1,6 @@
 # Warehouse Optimization & Smart Routing System
 
 Full-stack simulation platform for manufacturing and supply chain operations. The app models a smart warehouse, optimizes inventory placement and picking routes, schedules deliveries, and exposes operational analytics through a React dashboard backed by FastAPI.
-
 ## Stack
 
 - Frontend: React, Vite, Plotly, Lucide icons
